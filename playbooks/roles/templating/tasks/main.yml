@@ -1,0 +1,37 @@
+---
+- name: include variables
+  include_vars: ../vars/vars.yml
+
+- name: make tmp dir for all files
+  file:
+    path: /tmp/deploy/
+    state: directory
+    mode: '0755'
+
+- name: Templating oozie main job
+  template: 
+    src: ../template/job.xml.j2
+    dest: /tmp/deploy/job.xml
+
+- name: templating oozie job config to put throw API
+  template: 
+    src: ../template/job_params.xml.j2
+    dest: /tmp/deploy/job_params.xml
+
+- name: copy keytab to tmp dir
+  copy:
+    src: ../temp-lates/{{ hadoop_user }}.keytab
+    dest: /tmp/{{ hadoop_user }}.keytab
+
+- name: make krberos auth with keytab
+  shell: kinit -kt {{ hadoop_user }}.keytab {{ hadoop_user }}@{{ krb_suffix }}
+  args:
+    chdir: /tmp/deploy/
+    executable: /bin/bash
+
+- name: make klist for print our ticket to make future error handling easy
+  shell: klist
+  args:
+    executable: /bin/bash
+
+

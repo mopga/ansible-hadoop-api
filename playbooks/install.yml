@@ -1,0 +1,11 @@
+---
+- name: Make deploy locally throw API in CDH
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: true
+  become: yes
+  roles:
+    - templating
+    - webhdfs
+    - oozie
+

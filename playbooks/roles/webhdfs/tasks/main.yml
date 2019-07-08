@@ -1,0 +1,7 @@
+---
+- name: include variables
+  include_vars: ../vars/vars.yml
+
+- name: Install required packcges
+  action: >
+    {{ ansible_pkg_mgr }} name="{{ packets }}" state=present update_cache=yes

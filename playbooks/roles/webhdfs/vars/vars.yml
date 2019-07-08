@@ -1,0 +1,6 @@
+---
+packets:
+ - krb5-user
+ - curl
+ - wget
+ - unzip
