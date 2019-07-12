@@ -8,22 +8,25 @@
     state: directory
     mode: '0755'
 
-- name: Templating oozie main job
-  template: 
-    src: ../template/job.xml.j2
-    dest: /tmp/deploy/job.xml
+- name: copy oozie workflow and coordinator xmls to target dir
+  copy: 
+    src: ../template/{{ item }}
+    dest: /tmp/deploy/{{ item }}
+  with_items:
+    - workflow.xml
+    - coordinator.xml
 
 - name: templating oozie job config to put throw API
   template: 
     src: ../template/job_params.xml.j2
-    dest: /tmp/deploy/job_params.xml
+    dest: /tmp/deploy/config.xml
 
 - name: copy keytab to tmp dir
   copy:
     src: ../temp-lates/{{ hadoop_user }}.keytab
-    dest: /tmp/{{ hadoop_user }}.keytab
+    dest: /tmp/deploy/{{ hadoop_user }}.keytab
 
-- name: make krberos auth with keytab
+- name: aothentificate in kerberos with keytab
   shell: kinit -kt {{ hadoop_user }}.keytab {{ hadoop_user }}@{{ krb_suffix }}
   args:
     chdir: /tmp/deploy/
@@ -33,5 +36,8 @@
   shell: klist
   args:
     executable: /bin/bash
+  register: klist
+
+- debug: klist.stdout_lines
 
 
