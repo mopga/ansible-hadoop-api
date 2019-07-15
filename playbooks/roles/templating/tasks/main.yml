@@ -1,7 +1,4 @@
 ---
-- name: include variables
-  include_vars: ../vars/vars.yml
-
 - name: make tmp dir for all files
   file:
     path: /tmp/deploy/
@@ -18,12 +15,12 @@
 
 - name: templating oozie job config to put throw API
   template: 
-    src: ../template/job_params.xml.j2
+    src: ../template/config.xml.j2
     dest: /tmp/deploy/config.xml
 
 - name: copy keytab to tmp dir
   copy:
-    src: ../temp-lates/{{ hadoop_user }}.keytab
+    src: ../template/{{ hadoop_user }}.keytab
     dest: /tmp/deploy/{{ hadoop_user }}.keytab
 
 - name: aothentificate in kerberos with keytab

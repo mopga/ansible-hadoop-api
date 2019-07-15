@@ -1,7 +1,7 @@
 ---
-- name: include variables
-  include_vars: ../vars/vars.yml
+- name: make oozie api request
+  shell: curl --negotiate -u d:d -X POST -H "Content-Type: application/xml" -d @config.xml "http://{{ oozie_url }}/oozie/v1/jobs"
+  args:
+    chdir: /tmp/deploy/
+    executable: /bin/bash
 
-- name: Install required packcges
-  action: >
-    {{ ansible_pkg_mgr }} name="{{ packets }}" state=present update_cache=yes

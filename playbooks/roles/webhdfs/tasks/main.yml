@@ -1,7 +1,18 @@
 ---
-- name: include variables
-  include_vars: ../vars/vars.yml
+- name: make sure the directory exists
+  stat:
+    path: /tmp/deploy
+  register: deploy_dir
 
-- name: Install required packcges
-  action: >
-    {{ ansible_pkg_mgr }} name="{{ packets }}" state=present update_cache=yes
+- name: put files to hdfs throw api
+  shell: curl --negotiate -X PUT -L -u : "http://{{ httpfs_url }}/webhdfs/v1/user/{{ hadoop_user }}/{{ item }}?op=CREATE&&user.name={{ hadoop_user }}" --header 'Content-Type: application/octet-stream' -T ./{{ item }}
+  args:
+    chdir: /tmp/deploy/
+    executable: /bin/bash
+  with_items:
+    - wokrflow.xml
+    - coordinator.xml
+    - carbondata.jar
+  when: deploy_dir.stat.exists
+
+

@@ -6,3 +6,6 @@ end_date: "{{ lookup('env', 'END_DATE') }}"
 name_node_addr: "{{ lookup('env', 'NAME_NODE') }}"
 job_tracker_addr: "{{ lookup('env', 'JOB_TRACKER') }}"
 raspisanie: "{{ lookup('env', 'SHEDULER') }}"
+httpfs_url: "{{ lookup('env', 'HTTPFS_NODE') }}"
+oozie_url "{{ lookup('env', 'OOZIE_NODE') }}"
+
