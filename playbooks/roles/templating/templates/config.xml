@@ -1,0 +1,39 @@
+<configuration>
+    <property>
+        <name>user.name</name>
+        <value>{{ hadoop_user }}</value>
+    </property>
+    <property>
+        <name>wf_application_path</name>
+        <value>/user/{{ hadoop_user }}/workflow.xml</value>
+    </property>
+    <property>
+        <name>oozie.coord.application.path</name>
+        <value>/user/{{ hadoop_user }}/coordinator.xml</value>
+    </property>
+    <property>
+        <name>start_date</name>
+        <value>{{ start_date }}</value>
+    </property>
+    <property>
+        <name>end_date</name>
+        <value>{{ end_date }}</value>
+    </property>
+    <property>
+        <name>nameNode</name>
+        <value>{{ name_node_addr }}</value>
+    </property>
+    <property>
+        <name>jobTracker</name>
+        <value>{{ job_tracker_addr }}</value>
+    </property>
+    <property>
+        <name>oozie.use.system.libpath</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>frequency</name>
+        <value>{{ raspisanie }}</value>
+    </property>
+</configuration>
+
