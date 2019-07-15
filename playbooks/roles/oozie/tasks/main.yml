@@ -1,6 +1,6 @@
 ---
 - name: make oozie api request
-  shell: curl --negotiate -u d:d -X POST -H "Content-Type: application/xml" -d @config.xml "http://{{ oozie_url }}/oozie/v1/jobs"
+  shell: curl --negotiate -u d:d -X POST -H "Content-Type{{ ':' }} application/xml" -d @config.xml "http://{{ oozie_url }}/oozie/v1/jobs"
   args:
     chdir: /tmp/deploy/
     executable: /bin/bash

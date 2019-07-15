@@ -9,7 +9,7 @@
   copy: 
     src: ../template/{{ item }}
     dest: /tmp/deploy/{{ item }}
-  with_items:
+  loop:
     - workflow.xml
     - coordinator.xml
     - test.sh
@@ -36,6 +36,7 @@
     executable: /bin/bash
   register: klist
 
-- debug: klist.stdout_lines
+- debug:
+    msg: klist.stdout_lines
 
 

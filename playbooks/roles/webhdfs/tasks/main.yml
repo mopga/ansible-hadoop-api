@@ -5,15 +5,14 @@
   register: deploy_dir
 
 - name: put files to hdfs throw api
-  shell: curl --negotiate -X PUT -L -u : "http://{{ httpfs_url }}/webhdfs/v1/user/{{ hadoop_user }}/{{ item }}?op=CREATE&&user.name={{ hadoop_user }}" --header 'Content-Type: application/octet-stream' -T ./{{ item }}
+  shell: curl --negotiate -X PUT -L -u {{ ':' }} 'http://{{ httpfs_url }}/webhdfs/v1/user/{{ hadoop_user }}/{{ item }}?op=CREATE&&user.name={{ hadoop_user }}' --header 'Content-Type{{ ":" }} application/octet-stream' -T {{ item }}
   args:
     chdir: /tmp/deploy/
     executable: /bin/bash
-  with_items:
-    - wokrflow.xml
-    - coordinator.xml
-    - carbondata.jar
-    - test.sh
+  loop:
+    - "wokrflow.xml"
+    - "coordinator.xml"
+    - "test.sh"
   when: deploy_dir.stat.exists
 
 

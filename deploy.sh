@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 export DEPLOY_USER=cloudera-scm
-export KRB_USER= cloudera-scm/quickstart.cloudera
+export KRB_USER=cloudera-scm/quickstart.cloudera
 export KRB_REALM=CLOUDERA
 export START_DATE=2019-07-15T7:10Z
 export END_DATE=2019-07-17T7:10Z
