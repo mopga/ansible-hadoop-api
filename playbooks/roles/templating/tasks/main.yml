@@ -7,7 +7,7 @@
 
 - name: copy oozie workflow and coordinator xmls to target dir
   copy: 
-    src: ../template/{{ item }}
+    src: ../templates/{{ item }}
     dest: /tmp/deploy/{{ item }}
   loop:
     - workflow.xml
@@ -16,12 +16,12 @@
 
 - name: templating oozie job config to put throw API
   template: 
-    src: ../template/config.xml.j2
+    src: ../templates/config.xml.j2
     dest: /tmp/deploy/config.xml
 
 - name: copy keytab to tmp dir
   copy:
-    src: ../template/{{ hadoop_user }}.keytab
+    src: ../templates/{{ hadoop_user }}.keytab
     dest: /tmp/deploy/{{ hadoop_user }}.keytab
 
 - name: aothentificate in kerberos with keytab
