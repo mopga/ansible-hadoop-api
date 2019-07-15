@@ -5,6 +5,11 @@
     state: directory
     mode: '0755'
 
+#- name: unzip the archive with files to future workdir
+#  unarchive:
+#    src: release.zip
+#    dest: /tmp/deploy
+
 - name: copy oozie workflow and coordinator xmls to target dir
   copy: 
     src: templates/{{ item }}
