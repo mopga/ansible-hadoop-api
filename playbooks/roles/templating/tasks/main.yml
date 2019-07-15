@@ -7,7 +7,7 @@
 
 - name: copy oozie workflow and coordinator xmls to target dir
   copy: 
-    src: ../templates/{{ item }}
+    src: templates/{{ item }}
     dest: /tmp/deploy/{{ item }}
   loop:
     - workflow.xml
@@ -16,27 +16,18 @@
 
 - name: templating oozie job config to put throw API
   template: 
-    src: ../templates/config.xml.j2
+    src: templates/config.xml.j2
     dest: /tmp/deploy/config.xml
 
 - name: copy keytab to tmp dir
   copy:
-    src: ../templates/{{ hadoop_user }}.keytab
+    src: templates/{{ hadoop_user }}.keytab
     dest: /tmp/deploy/{{ hadoop_user }}.keytab
 
-- name: aothentificate in kerberos with keytab
+- name: auth in kerberos with keytab
   shell: kinit -kt {{ hadoop_user }}.keytab {{ krb_princ }}@{{ krb_suffix }}
   args:
     chdir: /tmp/deploy/
     executable: /bin/bash
-
-- name: make klist for print our ticket to make future error handling easy
-  shell: klist
-  args:
-    executable: /bin/bash
-  register: klist
-
-- debug:
-    msg: klist.stdout_lines
 
 

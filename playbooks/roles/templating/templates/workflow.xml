@@ -1,0 +1,19 @@
+<workflow-app name="test_linux_file" xmlns="uri:oozie:workflow:0.5">
+    <start to="shell-ea5b"/>
+    <kill name="Kill">
+        <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+    <action name="shell-ea5b">
+        <shell xmlns="uri:oozie:shell-action:0.1">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <exec>./test.sh</exec>
+            <file>/user/cloudera-scm/test.sh#test.sh</file>
+              <capture-output/>
+        </shell>
+        <ok to="End"/>
+        <error to="Kill"/>
+    </action>
+    <end name="End"/>
+</workflow-app>
+
