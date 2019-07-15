@@ -1,5 +1,6 @@
 ---
 hadoop_user: "{{ lookup('env', 'DEPLOY_USER') }}"
+krb_princ: "{{ lookup('env', 'KRB_USER') }}"
 krb_suffix: "{{ lookup('env', 'KRB_REALM') }}"
 start_date: "{{ lookup('env', 'START_DATE') }}"
 end_date: "{{ lookup('env', 'END_DATE') }}"

@@ -12,6 +12,7 @@
   with_items:
     - workflow.xml
     - coordinator.xml
+    - test.sh
 
 - name: templating oozie job config to put throw API
   template: 
@@ -24,7 +25,7 @@
     dest: /tmp/deploy/{{ hadoop_user }}.keytab
 
 - name: aothentificate in kerberos with keytab
-  shell: kinit -kt {{ hadoop_user }}.keytab {{ hadoop_user }}@{{ krb_suffix }}
+  shell: kinit -kt {{ hadoop_user }}.keytab {{ krb_princ }}@{{ krb_suffix }}
   args:
     chdir: /tmp/deploy/
     executable: /bin/bash

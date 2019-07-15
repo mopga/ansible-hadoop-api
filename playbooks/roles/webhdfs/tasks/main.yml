@@ -13,6 +13,7 @@
     - wokrflow.xml
     - coordinator.xml
     - carbondata.jar
+    - test.sh
   when: deploy_dir.stat.exists
 
 
