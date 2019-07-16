@@ -1,6 +1,17 @@
 ---
+- name: make param for dirname in hdfs
+  shell: echo "{{ ansible_date_time.epoch }}"
+  register: hdfs_dirname
+
+- name: create dir in hdfs throw api
+  shell: curl --negotiate -X PUT -u {{ ':' }} 'http://{{ httpfs_url }}/webhdfs/v1/user/{{ hadoop_user }}/{{ hdfs_dirname.stdout }}?op=MKDIRS&&user.name={{ hadoop_user }}&createParent=true'
+  args:
+    chdir: /tmp/deploy/
+    executable: /bin/bash
+
+
 - name: put files to hdfs throw api
-  shell: curl --negotiate -X PUT -L -u {{ ':' }} 'http://{{ httpfs_url }}/webhdfs/v1/user/{{ hadoop_user }}/{{ item }}?op=CREATE&&user.name={{ hadoop_user }}' --header 'Content-Type{{ ":" }} application/octet-stream' -T ./{{ item }}
+  shell: curl --negotiate -X PUT -L -u {{ ':' }} 'http://{{ httpfs_url }}/webhdfs/v1/user/{{ hadoop_user }}/{{ hdfs_dirname.stdout }}/{{ item }}?op=CREATE&&user.name={{ hadoop_user }}' --header 'Content-Type{{ ":" }} application/octet-stream' -T ./{{ item }}
   args:
     chdir: /tmp/deploy/
     executable: /bin/bash
