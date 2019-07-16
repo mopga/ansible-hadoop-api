@@ -6,16 +6,20 @@
     mode: '0755'
 
 - name: make var for start_date
-  shell: date --date='5 minutes ago' --utc +%FT%TZ
-  args:.
+  shell: date --date='5 minutes ago' --utc +%FT%H:%MZ
+  args:
     executable: /bin/bash
   register: start_date
 
 - name: make var for end date
-  shell: date --date='90 years' --utc +%FT%TZ
+  shell: date --date='90 years' --utc +%FT%H:%MZ
   args:
     executable: /bin/bash
   register: end_date
+
+- name: make param for dirname in hdfs
+  shell: echo "{{ ansible_date_time.epoch }}"
+  register: hdfs_dirname
 
 #- name: unzip the archive with files to future workdir
 #  unarchive:

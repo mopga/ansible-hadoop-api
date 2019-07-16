@@ -3,8 +3,8 @@
 export DEPLOY_USER=cloudera-scm
 export KRB_USER=cloudera-scm/quickstart.cloudera
 export KRB_REALM=CLOUDERA
-export START_DATE=2019-07-15T7:10Z
-export END_DATE=2019-07-17T7:10Z
+#export START_DATE=2019-07-15T7:10Z
+#export END_DATE=2019-07-17T7:10Z
 export NAME_NODE=hdfs://quickstart.cloudera:8020 
 export JOB_TRACKER=quickstart.cloudera:8032
 export SHEDULER="17 * * * *"

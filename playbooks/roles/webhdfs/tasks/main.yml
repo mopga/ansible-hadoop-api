@@ -1,8 +1,4 @@
 ---
-- name: make param for dirname in hdfs
-  shell: echo "{{ ansible_date_time.epoch }}"
-  register: hdfs_dirname
-
 - name: create dir in hdfs throw api
   shell: curl --negotiate -X PUT -u {{ ':' }} 'http://{{ httpfs_url }}/webhdfs/v1/user/{{ hadoop_user }}/{{ hdfs_dirname.stdout }}?op=MKDIRS&&user.name={{ hadoop_user }}&createParent=true'
   args:

@@ -5,11 +5,11 @@
     </property>
     <property>
         <name>wf_application_path</name>
-        <value>/user/{{ hadoop_user }}/workflow.xml</value>
+        <value>/user/{{ hadoop_user }}/{{ hdfs_dirname.stdout }}/workflow.xml</value>
     </property>
     <property>
         <name>oozie.coord.application.path</name>
-        <value>/user/{{ hadoop_user }}/coordinator.xml</value>
+        <value>/user/{{ hadoop_user }}/{{ hdfs_dirname.stdout }}/coordinator.xml</value>
     </property>
     <property>
         <name>start_date</name>
