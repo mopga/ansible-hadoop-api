@@ -5,6 +5,18 @@
     state: directory
     mode: '0755'
 
+- name: make var for start_date
+  shell: date --date='5 minutes ago' --utc +%FT%TZ
+  args:.
+    executable: /bin/bash
+  register: start_date
+
+- name: make var for end date
+  shell: date --date='90 years' --utc +%FT%TZ
+  args:
+    executable: /bin/bash
+  register: end_date
+
 #- name: unzip the archive with files to future workdir
 #  unarchive:
 #    src: release.zip
