@@ -33,7 +33,7 @@
   loop:
     - workflow.xml
     - coordinator.xml
-    - test.sh
+    - run.sh
 
 - name: templating oozie job config to put throw API
   template: 
