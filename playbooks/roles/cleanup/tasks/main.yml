@@ -1,0 +1,11 @@
+---
+- name: remove tmp deploy directory
+  file:
+    path: /tmp/deploy
+    state: absent
+
+- name: destroy the kerberso ticket
+  shell: kdestroy
+
+- name: say goodbye
+  debug: msg="Deplloy is over. Cleanup is over. GL, BB"

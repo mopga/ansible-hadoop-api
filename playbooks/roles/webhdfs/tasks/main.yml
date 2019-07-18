@@ -1,4 +1,8 @@
 ---
+- name: say hello
+  debug: msg="Start putting files to HDFS"
+
+
 - name: create dir in hdfs throw api
   shell: curl --negotiate -X PUT -u {{ ':' }} 'http://{{ httpfs_url }}/webhdfs/v1/user/{{ hadoop_user }}/{{ hdfs_dirname.stdout }}?op=MKDIRS&&user.name={{ hadoop_user }}&createParent=true'
   args:
@@ -16,3 +20,5 @@
     - "coordinator.xml"
     - "run.sh"
 
+- name: say end
+  debug: msg="Put to hdfs is over. Ready for next step"

@@ -1,4 +1,7 @@
 ---
+- name: say hello
+  debug: msg="Start templating files and create needed temp dirs for deploy"
+
 - name: make tmp dir for all files
   file:
     path: /tmp/deploy/
@@ -51,4 +54,5 @@
     chdir: /tmp/deploy/
     executable: /bin/bash
 
-
+- name: say end
+  debug: msg="All files created, krb ticket obtained, ready for next step"
