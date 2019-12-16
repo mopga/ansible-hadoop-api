@@ -4,4 +4,6 @@
 2. run deploy.sh
 3. goto hue/hadoop node to check your oozie job status.
 
+have fun.
+
 
